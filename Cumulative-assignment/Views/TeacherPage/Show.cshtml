@@ -1,5 +1,7 @@
 @model Cumulative_assignment.Models.Teacher
 <h1>@Model.TeacherFName @Model.TeacherLName</h1>
-<p>Employee number: @Model.TeacherEmployeeNum, Joined the company on @Model.TeacherHireDate.ToString("yyyy-M-d")</p>
+<p>Employee number: @Model.TeacherEmployeeNum , Joined the company on @Model.TeacherHireDate.ToString("yyyy-M-d")</p>
 <p>Salary: $@Model.TeacherSalary per hour</p>
-<p>...</p>
+<p>-----------------------------------</p>
+
+<a href="/TeacherPage/List">Back to List</a> <a class="alert-warning" href="/TeacherPage/DeleteConfirm/@Model.TeacherId">Delete</a>

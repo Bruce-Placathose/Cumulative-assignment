@@ -7,9 +7,6 @@ namespace Cumulative_assignment.Controllers
     
     public class TeacherPageController : Controller
     {
-        // currently relying on the API to retrieve Teacher information
-        // this is a simplified example. In practice, both the TeacherAPI and TeacherPage controllers
-        // should rely on a unified "Service", with an explicit interface
         private readonly TeacherAPIController _api;
         
         public TeacherPageController(TeacherAPIController api)
@@ -29,6 +26,40 @@ namespace Cumulative_assignment.Controllers
         {
             Teacher SelectedTeacher = _api.FindTeacher(id);
             return View(SelectedTeacher);
+        }
+
+        // GET : TeacherPage/New
+        [HttpGet]
+        public IActionResult New(int id)
+        {
+            return View();
+        }
+
+        // POST: TeacherPage/Create
+        [HttpPost]
+        public IActionResult Create(Teacher NewTeacher)
+        {
+            int TeacherId = _api.AddTeacher(NewTeacher);
+
+            // redirects to "Show" action on "Teacher" cotroller with id parameter supplied
+            return RedirectToAction("Show", new {id = TeacherId});
+        }
+
+        // GET : TeacherPage/DeleteConfirm/{id}
+        [HttpGet]
+        public IActionResult DeleteConfirm(int id)
+        {
+            Teacher SelectedTeacher = _api.FindTeacher(id);
+            return View(SelectedTeacher);
+        }
+
+        // POST: TeacherPage/Delete/{id}
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            int TeacherId = _api.DeleteTeacher(id);
+            // redirects to list action
+            return RedirectToAction("List");
         }
 
     }

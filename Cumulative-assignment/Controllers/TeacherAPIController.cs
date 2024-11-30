@@ -135,5 +135,91 @@ namespace Cumulative_assignment.Controllers
             }
             return SelectedTeacher;
         }
+
+        // [HttpPost(template:"AddTeacher")]
+        // public int AddTeacher([FromBody]Teacher TeacherData)
+        // {
+        //     // 'using' will close the connection after the code executes
+        //     using (MySqlConnection Connection = _context.AccessDatabase())
+        //     {
+        //         Connection.Open();
+        //         //Establish a new query for our database
+        //         MySqlCommand Command = Connection.CreateCommand();
+
+        //         // CURRENT_DATE() for the Teacher join date in this context
+        //         Command.CommandText = "insert into teachers (teacherfname, teacherlname, employeenumber, hiredate, salary) values (@teacherfname, @teacherlname, @employeenumber, CURRENT_DATE(), @salary)";
+        //         Command.Parameters.AddWithValue("@teacherfname", TeacherData.TeacherFName);
+        //         Command.Parameters.AddWithValue("@teacherlname", TeacherData.TeacherLName);
+        //         Command.Parameters.AddWithValue("@employeenumber", TeacherData.TeacherEmployeeNum);
+        //         Command.Parameters.AddWithValue("@salary", TeacherData.TeacherSalary);
+
+        //         Command.ExecuteNonQuery();
+
+        //         return Convert.ToInt32(Command.LastInsertedId);
+
+        //     }
+        //     // if failure
+        //     return 0;
+        // }
+
+        [HttpPost(template: "AddTeacher")]
+        public int AddTeacher([FromBody] Teacher TeacherData)
+        {
+            using (MySqlConnection Connection = _context.AccessDatabase())
+            {
+                Connection.Open();
+
+                // Retrieve the last employee number
+                MySqlCommand GetLastEmployeeNumberCommand = Connection.CreateCommand();
+                GetLastEmployeeNumberCommand.CommandText = "SELECT employeenumber FROM teachers ORDER BY teacherid DESC LIMIT 1";
+
+                string LastEmployeeNumber = GetLastEmployeeNumberCommand.ExecuteScalar()?.ToString();
+                
+                // Default to T400 if no records exist
+                int NewEmployeeNumber = 404; // Start after T400
+                if (!string.IsNullOrEmpty(LastEmployeeNumber) && LastEmployeeNumber.StartsWith("T"))
+                {
+                    NewEmployeeNumber = int.Parse(LastEmployeeNumber.Substring(1)) + 1;
+                }
+
+                string GeneratedEmployeeNumber = $"T{NewEmployeeNumber}";
+
+                // Establish a new query to insert the teacher
+                MySqlCommand Command = Connection.CreateCommand();
+                Command.CommandText = "INSERT INTO teachers (teacherfname, teacherlname, employeenumber, hiredate, salary) VALUES (@teacherfname, @teacherlname, @employeenumber, CURRENT_DATE(), @salary)";
+                Command.Parameters.AddWithValue("@teacherfname", TeacherData.TeacherFName);
+                Command.Parameters.AddWithValue("@teacherlname", TeacherData.TeacherLName);
+                Command.Parameters.AddWithValue("@employeenumber", GeneratedEmployeeNumber);
+                Command.Parameters.AddWithValue("@salary", TeacherData.TeacherSalary);
+
+                Command.ExecuteNonQuery();
+
+                // Return the last inserted ID
+                return Convert.ToInt32(Command.LastInsertedId);
+            }
+
+            // Return 0 if failure
+            return 0;
+        }
+
+        [HttpDelete(template:"DeleteTeacher/{TeacherId}")]
+        public int DeleteTeacher(int TeacherId)
+        {
+            // 'using' will close the connection after the code executes
+            using (MySqlConnection Connection = _context.AccessDatabase())
+            {
+                Connection.Open();
+                //Establish a new command (query) for our database
+                MySqlCommand Command = Connection.CreateCommand();
+
+                
+                Command.CommandText = "delete from teachers where teacherid=@id";
+                Command.Parameters.AddWithValue("@id", TeacherId);
+                return Command.ExecuteNonQuery();
+
+            }
+            // if failure
+            return 0;
+        }
     }
 }
