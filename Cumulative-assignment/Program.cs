@@ -1,7 +1,21 @@
+using System;
+using Cumulative_assignment.Models;
+using Cumulative_assignment.Controllers;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+
+// Swagger API help pages
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+// Database
+builder.Services.AddScoped<SchoolDbContext>();
+// API for now, but should be added as separate Author Service
+builder.Services.AddScoped<TeacherAPIController>();
 
 var app = builder.Build();
 
@@ -19,6 +33,9 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.MapControllerRoute(
     name: "default",
