@@ -19,13 +19,13 @@ namespace Cumulative_assignment.Controllers
 
 
         /// <summary>
-        /// Returns a list of Teachers in the system
+        /// Returns a list of Teachers when calling endpoint api/Teacher
         /// </summary>
         /// <example>
-        /// GET api/Teacher/ListTeachers -> [{"TeacherId":1,"TeacherFname":"Brian", "TeacherLName":"Smith"},{"TeacherId":2,"TeacherFname":"Jillian", "TeacherLName":"Montgomery"},..]
+        /// GET api/Teacher/ListTeachers -> [{"TeacherId":1,"TeacherFname":"Aaron", "TeacherLName":"Paul", "TeacherEmployeeNum":"Y401", "TeacherHireDate": "09-02-2017", "TeacherSalary": "50.20" },{"TeacherId":2,"TeacherFname":"Ben", "TeacherLName":"Tennison"},..]
         /// </example>
         /// <returns>
-        /// A list of Teacher objects 
+        /// A list of Teacher objects
         /// </returns>
         [HttpGet]
         [Route(template:"ListTeachers")]
@@ -83,13 +83,13 @@ namespace Cumulative_assignment.Controllers
 
 
         /// <summary>
-        /// Returns an Teacher in the database by their ID
+        /// Returns a specific Teacher in the database from their ID
         /// </summary>
         /// <example>
-        /// GET api/Teacher/FindTeacher/3 -> {"TeacherId":3,"TeacherFname":"Sam","TeacherLName":"Cooper"}
+        /// GET api/Teacher/FindTeacher/1 -> {"TeacherId":1,"TeacherFname":"Aaron", "TeacherLName":"Paul", "TeacherEmployeeNum":"Y401", "TeacherHireDate": "09-02-2017", "TeacherSalary": "50.20" }
         /// </example>
         /// <returns>
-        /// A matching Teacher object by its ID. Empty object if Teacher not found
+        /// A matching Teacher object by its ID. 
         /// </returns>
         [HttpGet]
         [Route(template: "FindTeacher/{id}")]
