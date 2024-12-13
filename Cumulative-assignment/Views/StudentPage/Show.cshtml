@@ -1,0 +1,7 @@
+@model Cumulative_assignment.Models.Student
+<h1>@Model.StudentFName @Model.StudentLName</h1>
+<p>Employee number: @Model.StudentNumber, Joined the company on @Model.StudentEnrollmentDate.ToString("yyyy-M-d")</p>
+@* <p>Salary: $@Model.StudentSalary per hour</p> *@
+<p>-----------------------------------</p>
+
+<a href="/StudentPage/List">Back to List</a> <a class="alert-warning" href="/StudentPage/DeleteConfirm/@Model.StudentId">Delete</a>

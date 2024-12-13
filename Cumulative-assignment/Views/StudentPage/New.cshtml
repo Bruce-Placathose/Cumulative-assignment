@@ -1,0 +1,31 @@
+<div id="containershow">
+    <nav>
+        <a class="navlink" href="/StudentPage/List">Back To Students</a>
+    </nav>
+    <h2>New Student</h2>
+    <form method="POST" action="/StudentPage/Create">
+        <div class="row">
+            <label for="StudentFname">First Name:</label>
+            <input type="text" id="StudentFname" name="StudentFname" />
+
+        </div>
+        <div class="row">
+            <label for="StudentLname">Last Name:</label>
+            <input type="text" id="StudentLname" name="StudentLname" />
+
+        </div>
+        @* <div class="row">
+            <label for="EmployeeNum">Employee Number</label>
+            <input type="text" id="EmployeeNum" name="EmployeeNum" />
+        </div> *@
+        @* <div class="row">˜
+            <label for="StudentSalary">Salary:</label>
+            <div>
+                <textarea id="StudentSalary" name="StudentSalary"></textarea>
+            </div>
+        </div> *@
+        <div class="row">
+            <input type="submit" value="Create Student" />
+        </div>
+    </form>
+</div>

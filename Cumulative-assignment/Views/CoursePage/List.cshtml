@@ -1,0 +1,13 @@
+@model IEnumerable<Cumulative_assignment.Models.Course>
+
+<h1>Course</h1>
+<a href="/CoursePage/New">New</a>
+<form method="GET" action="/CoursePage/List">
+    <input type="text" name="SearchKey" /> <input type="submit" value="Search"/>
+</form>
+
+@foreach (Cumulative_assignment.Models.Course CurrentCourse in Model)
+{
+    <div><a href="/CoursePage/Show/@CurrentCourse.CourseId">@CurrentCourse.CourseName</a></div>
+
+}

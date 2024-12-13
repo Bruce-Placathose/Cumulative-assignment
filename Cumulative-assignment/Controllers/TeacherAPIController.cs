@@ -136,31 +136,25 @@ namespace Cumulative_assignment.Controllers
             return SelectedTeacher;
         }
 
-        // [HttpPost(template:"AddTeacher")]
-        // public int AddTeacher([FromBody]Teacher TeacherData)
-        // {
-        //     // 'using' will close the connection after the code executes
-        //     using (MySqlConnection Connection = _context.AccessDatabase())
-        //     {
-        //         Connection.Open();
-        //         //Establish a new query for our database
-        //         MySqlCommand Command = Connection.CreateCommand();
+ 
 
-        //         // CURRENT_DATE() for the Teacher join date in this context
-        //         Command.CommandText = "insert into teachers (teacherfname, teacherlname, employeenumber, hiredate, salary) values (@teacherfname, @teacherlname, @employeenumber, CURRENT_DATE(), @salary)";
-        //         Command.Parameters.AddWithValue("@teacherfname", TeacherData.TeacherFName);
-        //         Command.Parameters.AddWithValue("@teacherlname", TeacherData.TeacherLName);
-        //         Command.Parameters.AddWithValue("@employeenumber", TeacherData.TeacherEmployeeNum);
-        //         Command.Parameters.AddWithValue("@salary", TeacherData.TeacherSalary);
-
-        //         Command.ExecuteNonQuery();
-
-        //         return Convert.ToInt32(Command.LastInsertedId);
-
-        //     }
-        //     // if failure
-        //     return 0;
-        // }
+        /// <summary>
+        /// Adds a teacher to the database
+        /// </summary>
+        /// <example>
+        /// POST: api/Teacher/AddTeacher
+        /// Headers: Content-Type: application/json
+        /// Request Body:
+        /// {
+        ///    "teacherFName": "Duncan",
+        ///    "teacherLName": "Douglas",
+        ///    "teacherHireDate": "2024-11-30T00:00:00",
+        ///    "teacherSalary": "30.20"
+        /// } -> 17
+        /// </example>
+        /// <returns>
+        /// The inserted teacher Id from the database if successful. 0 if Unsuccessful
+        /// </returns>
 
         [HttpPost(template: "AddTeacher")]
         public int AddTeacher([FromBody] Teacher TeacherData)
@@ -201,6 +195,17 @@ namespace Cumulative_assignment.Controllers
             // Return 0 if failure
             return 0;
         }
+
+        /// <summary>
+        /// Deletes a teacher from the database
+        /// </summary>
+        /// <param name="TeacherId">Primary key of the teacher to delete</param>
+        /// <example>
+        /// DELETE: api/Teacher/DeleteTeacher/19 -> 1
+        /// </example>
+        /// <returns>
+        /// Number of rows affected by delete operation.
+        /// </returns>
 
         [HttpDelete(template:"DeleteTeacher/{TeacherId}")]
         public int DeleteTeacher(int TeacherId)

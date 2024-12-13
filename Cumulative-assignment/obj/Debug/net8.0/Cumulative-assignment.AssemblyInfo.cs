@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Cumulative-assignment")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+88384d747ed98f4e6dfe259723e31d209f0aa8d3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+255c36613f5fa5662f3967beaf9e3f231ea57654")]
 [assembly: System.Reflection.AssemblyProductAttribute("Cumulative-assignment")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Cumulative-assignment")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
