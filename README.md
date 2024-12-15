@@ -39,6 +39,9 @@ screenshot-2
 ![alt text](./Cumulative-assignment/testingImg/viewATeacherTest.png)
 
 
+[Cumulative-part2](https://github.com/Bruce-Placathose/Cumulative-assignment/tree/cumulative-part2)
+
+
 
 
 
